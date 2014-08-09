@@ -13,13 +13,17 @@ class Pythag:
 
     def wholeHyp(self): 
         hyps = [ ]
+        count = 0
         for i in range(1, 100): 
             for j in range(2, 100):
                 if self.doHyp(i, j).is_integer() and i < j and self.doHyp(i, j) <= 100: 
                     hyps.append([i, j, self.doHyp(i, j)])
+                    count += 1
 
         for h in hyps: 
             print str(h[0]) + ", " + str(h[1]) + " = " + str(h[2])
+    
+        print "There are %s whole number pythagorean equations, under 100." % str(count)
 
         
 P = Pythag(3, 4)
