@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os, sys, time
+import os, sys, time, string
 class TypeWriter:
     def Write(self, line, speed):
         for a in line:
@@ -9,4 +9,4 @@ class TypeWriter:
         sys.stdout.write("\n")
 
 T = TypeWriter()
-T.Write("I'm a typewriter.", 0.3)
+T.Write(string.join(sys.argv[1::]), 0.1)
