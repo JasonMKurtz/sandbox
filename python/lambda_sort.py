@@ -1,5 +1,14 @@
 #!/usr/bin/env python2.7
-""" Requires python2.7 """ 
+""" 
+    Requires python2.7 
+    Example: 
+
+    $ ./lambda_sort.py
+    3 digits: 384
+    2 digits: 48
+    1 digits: 6
+""" 
+
 import operator
 i = 1000
 input = [ x for x in xrange(0, i) ]
