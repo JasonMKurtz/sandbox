@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import re, sys
-regex = "(?P<url>(?P<proto>[^:]+):\/\/?(?P<hostname>[^\/:]+)):(?P<port>[^\/]+)(?P<path>.+)?"
+regex = "(?P<url>(?P<proto>[^:]+):\/\/?(?P<hostname>[^\/:]+)):?(?P<port>[^\/]+)?(?P<path>.+)?"
 #string = 'https://nyc-wdevtool-01:8080/jenkins/job/ecommerce-platform-master-appc/1679/'
 string = ' '.join(sys.argv[1:])
 
