@@ -6,4 +6,5 @@ string = ' '.join(sys.argv[1:])
 
 m = re.search(regex, string)
 print string
-print "URL: %s, protocol: %s, hostname: %s, port: %s, path: %s" % (m.group('url'), "http" if m.group('proto') is None else m.group('proto'), m.group('hostname'), "80" if m.group('port') is None else m.group('port'), m.group('path'))
+#print "URL: %s, protocol: %s, hostname: %s, port: %s, path: %s" % (m.group('url'), "http" if m.group('proto') is None else m.group('proto'), m.group('hostname'), "80" if m.group('port') is None else m.group('port'), m.group('path'))
+print m.groupdict()
