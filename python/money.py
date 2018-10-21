@@ -41,7 +41,7 @@ class Ledger:
     def getTransactionByType(
         self,
         category: TransactionType,
-    ) -> float:
+    ) -> dict:
         filter = [t.amount for t in self.transactions if t.category is category]
         return {
             'total': sum(filter),
