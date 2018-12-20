@@ -61,3 +61,10 @@ checks = Validator(
 
 print(checks.valid())
 print(checks.get_chain())
+
+"""
+$ ./playing.py
+True
+ValidateFullName(): Validates the person has a first and last name
+ValidateSaneAge(): Validates the person has a sane age
+"""
