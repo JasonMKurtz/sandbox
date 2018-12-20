@@ -47,7 +47,7 @@ class Validator:
     def valid(self) -> bool:
         return len([v for v in self.is_valid if not v]) == 0
 
-    def get_chain(self) -> List[str]:
+    def get_chain(self) -> str:
         return "\n".join([doc for doc in self.chain])
         
 
