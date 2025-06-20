@@ -43,5 +43,7 @@ func main() {
 		log.Fatalf("error reading transactions: %e", err)
 	}
 
-	fmt.Printf("%s\n", transactions[0])
+	for _, tx := range transactions {
+		fmt.Printf("%s\n", tx)
+	}
 }
