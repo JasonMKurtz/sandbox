@@ -53,7 +53,7 @@ func (t Transaction) String() string {
 	*/
 
 	var cp string
-	if _, ok := t.GetCounterpartiesOk(); ok {
+	if len(t.GetCounterparties()) > 0 {
 		cp = t.GetCounterparties()[0].Name
 	} else {
 		cp = ""
