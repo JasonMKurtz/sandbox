@@ -1,4 +1,4 @@
-package main
+package manager
 
 import (
 	"context"
@@ -8,26 +8,52 @@ import (
 	plaid "github.com/plaid/plaid-go/v20/plaid"
 )
 
-type client struct {
+type Client struct {
 	ctx         context.Context
 	client      *plaid.APIClient
+	linkToken   string
 	publicToken string
 	token       string
 	env         plaid.Environment
 }
 
-func NewClient() *client {
-	c := &client{}
+func (c *Client) GetPublicToken() string {
+	return c.publicToken
+}
+
+func (c *Client) SetPublicToken(token string) {
+	c.publicToken = token
+}
+
+func (c *Client) SetPrivateToken(token string) {
+	fmt.Printf("setting private token: %s\n", token)
+	c.token = token
+}
+
+func NewClient(env plaid.Environment) *Client {
+	c := &Client{}
 	c.ctx = context.Background()
+	c.env = env
+
+	clientID := os.Getenv("PLAID_CLIENT_ID")
+	secret := os.Getenv("PLAID_SECRET")
+
+	cfg := plaid.NewConfiguration()
+	cfg.AddDefaultHeader("PLAID-CLIENT-ID", clientID)
+	cfg.AddDefaultHeader("PLAID-SECRET", secret)
+	cfg.UseEnvironment(env)
+
+	c.client = plaid.NewAPIClient(cfg)
+
 	return c
 }
 
-func (c *client) GetClient() *plaid.APIClient {
+func (c *Client) GetClient() *plaid.APIClient {
 	return c.client
 }
 
 // environment: plaid.Sandbox, plaid.Production
-func (c *client) Init(env plaid.Environment) error {
+func (c *Client) Init(env plaid.Environment) error {
 	// Get your keys from https://dashboard.plaid.com/account/keys
 	clientID := os.Getenv("PLAID_CLIENT_ID")
 	secret := os.Getenv("PLAID_SECRET")
@@ -47,7 +73,7 @@ func (c *client) Init(env plaid.Environment) error {
 	return nil
 }
 
-func (c *client) getAccountNames() (map[string]string, error) {
+func (c *Client) getAccountNames() (map[string]string, error) {
 	resp, _, err := c.GetClient().PlaidApi.AccountsGet(c.ctx).
 		AccountsGetRequest(*plaid.NewAccountsGetRequest(c.token)).
 		Execute()

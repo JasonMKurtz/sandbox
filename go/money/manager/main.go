@@ -1,24 +1,26 @@
-package main
+package manager
 
 import (
 	"fmt"
-	"log"
-	"time"
 
 	"github.com/plaid/plaid-go/v20/plaid"
 )
 
 type Manager struct {
-	apiclient *client
+	apiclient *Client
 	accounts  map[string]string
+}
+
+func (m *Manager) GetClient() *Client {
+	return m.apiclient
 }
 
 func NewManager(env plaid.Environment) (*Manager, error) {
 	m := &Manager{}
 
-	m.apiclient = NewClient()
+	m.apiclient = NewClient(env)
 	if err := m.apiclient.Init(env); err != nil {
-		return nil, fmt.Errorf("error creating manager: %e", err)
+		return nil, fmt.Errorf("error creating manager: %s", err)
 	}
 
 	names, err := m.apiclient.getAccountNames()
@@ -30,6 +32,7 @@ func NewManager(env plaid.Environment) (*Manager, error) {
 	return m, nil
 }
 
+/*
 func main() {
 	m, err := NewManager(plaid.Sandbox)
 	if err != nil {
@@ -47,3 +50,4 @@ func main() {
 		fmt.Printf("%s\n", tx)
 	}
 }
+*/

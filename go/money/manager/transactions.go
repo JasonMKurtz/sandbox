@@ -1,4 +1,4 @@
-package main
+package manager
 
 import (
 	"fmt"
@@ -30,7 +30,7 @@ func (t Transaction) String() string {
 
 func (m *Manager) GetTransactions() ([]Transaction, error) {
 	// STEP 3: Fetch transactions
-	start := time.Now().AddDate(0, -2, 0).Format("2006-01-02")
+	start := time.Now().AddDate(0, 0, -1).Format("2006-01-02")
 	end := time.Now().Format("2006-01-02")
 
 	txReq := plaid.NewTransactionsGetRequest(m.apiclient.token, start, end)

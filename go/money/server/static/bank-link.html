@@ -24,7 +24,6 @@
               body: JSON.stringify({ public_token })
             })
               .then(res => res.text())
-              .then(msg => alert("Success! " + msg))
               .catch(err => alert("Exchange failed: " + err));
           },
           onExit: function(err, metadata) {
