@@ -1,2 +1,3 @@
 go/money/manager/manager
 go/money/server/server
+go/money/env
